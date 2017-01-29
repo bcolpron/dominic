@@ -1,7 +1,8 @@
 function Controller(character, map) {
     this.character = character;
     this.setMovementSpeed(1);
-    this.map = map;
+    this.loadWorld(map);
+	
 };
 
 Controller.prototype.NONE  = 0;
@@ -9,6 +10,22 @@ Controller.prototype.UP    = 1;
 Controller.prototype.DOWN  = 2;
 Controller.prototype.LEFT  = 4;
 Controller.prototype.RIGHT = 8;
+
+Controller.prototype.loadWorld = function(map) {
+	this.map = map;
+    for(var x=0; x != 13; x++) {
+        for (var y=0; y != 7; y++) {
+            if (this.map[y][x] == 1) {
+                this.addTree(x,y);
+            }
+        }
+    }
+	this.character.setPosition(0,0);
+}
+
+Controller.prototype.addTree = function(x,y) {
+    $(".main").append($('<img class="arbre" src="images/arbre.gif" style="left: ' + (96*x-8) + 'px; top: ' + (96*y-8) + 'px">'));
+}
 
 Controller.prototype.startMove = function() {
     if (!this.moveTimer) {
