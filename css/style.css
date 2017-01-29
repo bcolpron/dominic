@@ -16,6 +16,10 @@ body {
     position: absolute;
     z-index: 10;
 }
+.portal {
+    position: absolute;
+    z-index: 0;
+}
 .character-picker-button {
     width: 48px;
     height: 48px;

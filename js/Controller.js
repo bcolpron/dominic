@@ -12,6 +12,11 @@ Controller.prototype.LEFT  = 4;
 Controller.prototype.RIGHT = 8;
 
 Controller.prototype.loadWorld = function(world) {
+    this.world = world;
+    
+    this.setScrollSpeed(0);
+    setTimeout($.proxy(this.setScrollSpeed, this, 1), 10);
+    
     var arena = $(".main")
     arena.empty();
     arena.css("background-color", world.color);
@@ -21,13 +26,21 @@ Controller.prototype.loadWorld = function(world) {
             if (this.map[y][x] == 1) {
                 this.addTree(x,y);
             }
+            if (this.map[y][x] == 2) {
+                this.addPortal(x,y);
+            }
         }
     }
 	this.character.setPosition(0,0);
+    
 }
 
 Controller.prototype.addTree = function(x,y) {
     $(".main").append($('<img class="arbre" src="images/arbre.gif" style="left: ' + (96*x-8) + 'px; top: ' + (96*y-8) + 'px">'));
+}
+
+Controller.prototype.addPortal = function(x,y) {
+    $(".main").append($('<img class="portal" src="images/portal.gif" style="left: ' + (96*x-8) + 'px; top: ' + (96*y-8) + 'px">'));
 }
 
 Controller.prototype.startMove = function() {
@@ -106,9 +119,25 @@ Controller.prototype.move = function() {
     } else {
         this.character.setPosition(p);
     }
+    
+    if (this.map[p.y][p.x] == 2) {
+        var to = this.world.name == "world1" ? worlds.world2 : worlds.world1;
+        setTimeout($.proxy(this.loadWorld, this, to), 500);
+    }
 }
 
 Controller.prototype.setClass = function(c) {
     this.character.setClass(c);
 }
+
+Controller.prototype.setScrollSpeed = function(speed) {
+    var $element = $(".character");
+    if (speed != 0) {
+        $element.css({transition: "left " + 500/speed + "ms, top " + 500/speed + "ms",
+                           "transition-timing-function": "linear"});
+    } else {
+        $element.css({transition: "left 0ms, top 0ms"});
+    }
+}
+
 
