@@ -3,7 +3,7 @@ body {
 	overflow: hidden;
 }
 .main {
-    background-color: darkgreen;
+    #background-color: darkgreen;
 	height: 100%;
 }
 .character {
@@ -22,6 +22,8 @@ body {
     background-image: url("../images/pokeball.png");
     z-index: 20;
     position: absolute;
+    left: 0px;
+    top: 0px;
 }
 .dialog-background {
     width: 100%;

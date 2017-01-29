@@ -11,8 +11,11 @@ Controller.prototype.DOWN  = 2;
 Controller.prototype.LEFT  = 4;
 Controller.prototype.RIGHT = 8;
 
-Controller.prototype.loadWorld = function(map) {
-	this.map = map;
+Controller.prototype.loadWorld = function(world) {
+    var arena = $(".main")
+    arena.empty();
+    arena.css("background-color", world.color);
+	this.map = world.map;
     for(var x=0; x != 13; x++) {
         for (var y=0; y != 7; y++) {
             if (this.map[y][x] == 1) {
@@ -95,8 +98,8 @@ Controller.prototype.move = function() {
     }
     
     if (p.x < 0 || p.x > 12 || p.y < 0 || p.y > 6
-        || map[p.y][p.x] == 1 && this.direction == this.UP
-        || map[this.character.position.y][this.character.position.x] == 1 && this.direction == this.DOWN
+        || this.map[p.y][p.x] == 1 && this.direction == this.UP
+        || this.map[this.character.position.y][this.character.position.x] == 1 && this.direction == this.DOWN
         )
     {
         this.character.stopMoving();
