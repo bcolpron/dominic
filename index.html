@@ -12,6 +12,8 @@
     
 <script type="text/javascript">
 
+// Index de couleurs: http://www.w3schools.com/colors/colors_names.asp
+
 worlds =
 {
     world1:
@@ -47,10 +49,20 @@ worlds =
 
 $(function() {
 	window.game = {};
-    game.hero = new Character(0,0);
+    game.hero = new Character(0,0, "oddish");
     game.controller = new Controller(game.hero, worlds.world1);
     game.keyboard = new KeyboardController(game.controller);
     game.picker = new CharacterPicker(game.controller);
+    game.riley = new Character(10,5, "riley");
+
+    setInterval(function() {
+        var dx = game.hero.position.x - game.riley.position.x;
+        var dy = game.hero.position.y - game.riley.position.y;
+        game.riley.setPosition(game.riley.position.x + Math.sign(dx), game.riley.position.y + Math.sign(dy));
+
+    }, 1000); 
+
+
 });
 
 </script>
@@ -66,6 +78,7 @@ $(function() {
             <img class="character-button" data-class="oddish" src="images/oddish.gif">
             <img class="character-button" data-class="gengar" src="images/gengar.gif">
             <img class="character-button" data-class="herbizarre" src="images/herbizarre.gif">
+            <img class="character-button" data-class="pikachu" src="images/pikachu.gif">
         </div>
     </div>
 

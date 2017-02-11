@@ -15,7 +15,6 @@ Controller.prototype.loadWorld = function(world) {
     this.world = world;
     
     this.setScrollSpeed(0);
-    setTimeout($.proxy(this.setScrollSpeed, this, 1), 10);
     
     var arena = $(".main")
     arena.empty();
@@ -32,7 +31,7 @@ Controller.prototype.loadWorld = function(world) {
         }
     }
 	this.character.setPosition(0,0);
-    
+    setTimeout($.proxy(this.setScrollSpeed, this, 1), 100);
 }
 
 Controller.prototype.addTree = function(x,y) {

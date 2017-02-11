@@ -1,8 +1,8 @@
-function Character(x, y) {
+function Character(x, y, class_) {
     this.sprites = $('<div class="character"/>');
     $("body").append(this.sprites);
 
-    this.setClass("oddish");
+    this.setClass(class_);
     this.setPosition(x,y);
     this.setDirection(0);
 }
